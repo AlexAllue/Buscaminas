@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,8 +30,8 @@ import java.util.Date;
  * Created by Allu on 15/04/2015.
  */
 public class GameActivity extends ActionBarActivity {
+
     private GridView gridview;
-    private ArrayList<Integer> bombas;
     private String alias,parrilla,tiempo,numBombas,log="";
     private boolean atrasSalir;
     private int longitud,nBombas,casillas;
@@ -42,10 +41,12 @@ public class GameActivity extends ActionBarActivity {
     public ProgressBar progreso;
     public int progresoNum=0;
     public MediaPlayer mediaPlayer;
-    public long ttt;
+    public long tiempoLong;
+    public ArrayList<String> apretado;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
 
@@ -59,29 +60,29 @@ public class GameActivity extends ActionBarActivity {
         tiempo=intent.getStringExtra("tiempo");
         numBombas=intent.getStringExtra("bombas");
 
+
         longitud=Integer.parseInt(parrilla);
         casillas=longitud*longitud;
+
         tablero=new ArrayList<>();
+        apretado = new ArrayList<>();
+
         nBombas=calcularNumeroBombas(numBombas);
         ponerBombas(nBombas);
         ponerNumeros();
+
         String ponertiempo;
         if (tiempo.matches("0")) ponertiempo="Sin límite";
         else ponertiempo=tiempo+"s";
         ponerLog("Alias: " + alias + " Casillas: " + casillas + " Minas: " + numBombas + " NºMinas: " + nBombas + " Limite de Tiempo: " + ponertiempo);
 
-
-
         gridview = (GridView) findViewById(R.id.gridview);
         gridview.setNumColumns(longitud);
-
         gridview.setAdapter(new ButtonAdapter(this));
 
         calFechaInicial = Calendar.getInstance();
         calFechaInicial.setTime(new Date());
-        ttt=calFechaInicial.getTimeInMillis();
-
-
+        tiempoLong=calFechaInicial.getTimeInMillis();
 
         casillasText = (TextView) findViewById(R.id.casillasText);
         tiempoText = (TextView) findViewById(R.id.tiempoText);
@@ -94,7 +95,6 @@ public class GameActivity extends ActionBarActivity {
         progreso = (ProgressBar) findViewById(R.id.progressBar);
         progreso.setMax(casillas-nBombas);
         progreso.setProgress(progresoNum);
-
     }
 
     public int calcularNumeroBombas(String numBombas){
@@ -114,10 +114,12 @@ public class GameActivity extends ActionBarActivity {
         }
         Collections.shuffle(tablero);
     }
+
     public void ponerNumeros(){
 
         String [] cambio= new String[tablero.size()];
         cambio= tablero.toArray(cambio);
+
         for(int i=0;i<longitud*longitud;i++){
             int numero=0;
             if(!cambio[i].matches("B")){
@@ -132,11 +134,13 @@ public class GameActivity extends ActionBarActivity {
 
                 if(numero!=0) cambio[i]=numero+"";
             }
-
         }
+
         tablero= new ArrayList<>(Arrays.asList(cambio));
+
     }
 
+    //adaptador del gridview
     public class ButtonAdapter extends BaseAdapter {
         private Context mContext;
 
@@ -156,49 +160,58 @@ public class GameActivity extends ActionBarActivity {
             return position;
         }
 
-        // create a new ImageView for each item referenced by the Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
+
             Button btn;
+
             if (convertView == null) {
-                // if it's not recycled, initialize some attributes
                 btn = new Button(mContext);
-
-
-
-
+                //tamaño de casillas segun la pantalla
                 if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
                     DisplayMetrics metrics = getApplicationContext().getResources().getDisplayMetrics();
                     int screenWidth = (int) (metrics.widthPixels*0.65);
                     btn.setLayoutParams(new GridView.LayoutParams(screenWidth/longitud,screenWidth/longitud));
                     btn.setPadding(0, 0, 0, 0);
-                }
-                    else{
+                }else{
                     DisplayMetrics metrics = getApplicationContext().getResources().getDisplayMetrics();
                     int screenWidth = metrics.widthPixels;
                     btn.setLayoutParams(new GridView.LayoutParams(screenWidth/longitud,screenWidth/longitud));
                     btn.setPadding(0, 0, 0, 0);
                 }
-
             } else {
                 btn = (Button) convertView;
-
-
             }
+
             //btn.setText(tablero.get(position));
             btn.setTextColor(Color.BLACK);
             btn.setBackgroundResource(R.drawable.button);
             btn.setOnClickListener(new MyOnClickListener(position));
             btn.setId(position);
+
+            //Cuando la pantalla ha girado
+            if(apretado.contains(""+position)){
+                btn.setText(tablero.get(position));
+                btn.setEnabled(false);
+                if(tablero.get(position).matches("1"))btn.setTextColor(Color.BLUE);
+                if(tablero.get(position).matches("2"))btn.setTextColor(Color.GREEN);
+                if(tablero.get(position).matches("3"))btn.setTextColor(Color.RED);
+                if(tablero.get(position).matches("4"))btn.setTextColor(Color.MAGENTA);
+                if(tablero.get(position).matches("5"))btn.setTextColor(Color.YELLOW);
+                if(tablero.get(position).matches("6"))btn.setTextColor(Color.CYAN);
+                if(tablero.get(position).matches("7"))btn.setTextColor(Color.GRAY);
+                if(tablero.get(position).matches("8"))btn.setTextColor(Color.BLACK);
+            }
+
+
             return btn;
+
         }
-
-
 
     }
 
-
-
+//listener de los botones
     class MyOnClickListener implements View.OnClickListener{
+
         private final int position;
 
         public MyOnClickListener(int position){
@@ -207,21 +220,25 @@ public class GameActivity extends ActionBarActivity {
 
         public void onClick(View view){
 
+            apretado.add(""+position);
 
-
+            //Controlar el tiempo transcurrido
             Calendar calFechaFinal = Calendar.getInstance();
             calFechaFinal.setTime(new Date());
+            String total=""+(calFechaFinal.getTimeInMillis()-tiempoLong);
+            final int maximo = Integer.parseInt(tiempo);
+            final int transcurrido = Integer.parseInt(total)/1000;
 
-            String total=""+(calFechaFinal.getTimeInMillis()-ttt);
-
-            final int hola = Integer.parseInt(tiempo);
-            final int adios = Integer.parseInt(total)/1000;
             casillas--;
             progresoNum++;
+
+            //Actualizar datos de la partida
             progreso.setProgress(progresoNum);
             casillasText.setText(getResources().getString(R.string.casillas)+casillas);
-            tiempoText.setText(getResources().getString(R.string.descubrir)+(hola-adios)+"s");
-            if(adios>hola&&hola!=0){
+            tiempoText.setText(getResources().getString(R.string.descubrir)+(maximo-transcurrido)+"s");
+
+            //Si el tiempo se ha acabado
+            if(transcurrido>maximo&&maximo!=0){
                 Toast.makeText(getApplicationContext(), "Has perdido! Se ha agotado el tiempo.", Toast.LENGTH_LONG).show();
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sound_lose);
                 mediaPlayer.start();
@@ -231,14 +248,13 @@ public class GameActivity extends ActionBarActivity {
                         ponerLog("Has agotado el tiempo!! " + " Te han quedado " + (casillas + 1) + " Casillas por descubrir");
                         Intent intent = new Intent(GameActivity.this, ResultActivity.class);
                         intent.putExtra("log",log);
-                        intent.putExtra("resultado", "Lose");
                         startActivity(intent);
                         finish();
                     };
                 }, 3000);
-
-
             }
+
+            //Si se ha apretado una bomba
             if(tablero.get(position).matches("B")){
                 view.setBackgroundResource(R.drawable.icon_red);
                 Toast.makeText(getApplicationContext(), "Has perdido! Has descubierto una bomba.", Toast.LENGTH_LONG).show();
@@ -251,7 +267,6 @@ public class GameActivity extends ActionBarActivity {
                         ponerLog("Has perdido!! Bomba en la casilla " + ((position % longitud) + 1) + "," + ((position / longitud) + 1) + " Te han quedado " + casillas + " Casillas por descubrir");
                         Intent intent = new Intent(GameActivity.this, ResultActivity.class);
                         intent.putExtra("log", log);
-                        intent.putExtra("resultado", "Lose");
                         startActivity(intent);
                         finish();
                     }
@@ -259,7 +274,7 @@ public class GameActivity extends ActionBarActivity {
                     ;
                 }, 3000);
 
-            }else{
+            }else{ //Si no es bomba
                 ((Button)view).setText(tablero.get(position));
                 if(tablero.get(position).matches("1"))((Button) view).setTextColor(Color.BLUE);
                 if(tablero.get(position).matches("2"))((Button) view).setTextColor(Color.GREEN);
@@ -272,6 +287,7 @@ public class GameActivity extends ActionBarActivity {
 
 
             }
+            //Si ya no quedan mas casillas por descubrir
             if(casillas==nBombas){
                 ((Button)view).setText(tablero.get(position));
                 Toast.makeText(getApplicationContext(), "Has ganado! Enhorabuena.", Toast.LENGTH_LONG).show();
@@ -280,26 +296,20 @@ public class GameActivity extends ActionBarActivity {
                 new Handler().postDelayed(new Runnable(){
                     public void run(){
                         mediaPlayer.stop();
-                        ponerLog("Has ganado!! " + " Te han sobrado " + (hola - adios) + "s");
+                        ponerLog("Has ganado!! " + " Te han sobrado " + (maximo - transcurrido) + "s");
                         Intent intent = new Intent(GameActivity.this, ResultActivity.class);
                         intent.putExtra("log",log);
-                        intent.putExtra("resultado", "Win");
                         startActivity(intent);
                         finish();
                     };
                 }, 3000);
             }
 
-
-
                     ((Button) view).setEnabled(false);
 
         }
 
-
-
     }
-
 
     @Override
     public void onBackPressed() {
@@ -308,7 +318,7 @@ public class GameActivity extends ActionBarActivity {
             return;
         }
         this.atrasSalir = true;
-        Toast.makeText(this, "Si pulsas el botón atrás otra vez cerraras la aplicación", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.atrasToast, Toast.LENGTH_LONG).show();
     }
 
     public void ponerLog(String parte){
@@ -318,15 +328,15 @@ public class GameActivity extends ActionBarActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-        outState.putSerializable("fechainicial",calFechaInicial);
+
         outState.putInt("casillasRestantes", casillas);
         outState.putString("tiempo", tiempoText.getText().toString());
         outState.putString("casillas", casillasText.getText().toString());
         outState.putString("bombas", bombasText.getText().toString());
         outState.putStringArrayList("tablero",tablero);
         outState.putInt("progress",progresoNum);
-        outState.putLong("ttt",ttt);
-
+        outState.putLong("tiempoLong",tiempoLong);
+        outState.putStringArrayList("apretado",apretado);
 
     }
 
@@ -340,8 +350,8 @@ public class GameActivity extends ActionBarActivity {
         bombasText.setText(savedInstanceState.getString("bombas"));
         tablero=savedInstanceState.getStringArrayList("tablero");
         progresoNum=(savedInstanceState.getInt("progress"));
-        ttt=savedInstanceState.getLong("ttt");
-
+        tiempoLong=savedInstanceState.getLong("tiempoLong");
+        apretado=savedInstanceState.getStringArrayList("apretado");
     }
 
 }
