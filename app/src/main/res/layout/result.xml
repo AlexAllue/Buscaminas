@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fechaText"
+        android:id="@+id/fechaText"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fecha"
+        android:focusable="false"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logText"
+        android:id="@+id/logText"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/log"
+        android:focusable="false"
+        android:singleLine="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/correoText"
+        android:id="@+id/correoText"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:inputType="textEmailAddress"
+        android:text="@string/correo"
+        ><requestFocus/></EditText>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity = "center_horizontal"
+        android:id="@+id/correoLayout"
+        android:weightSum="1"
+        android:layout_marginTop="15dp"
+        >
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/enviar"
+        android:id="@+id/enviar"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button"
+        android:textStyle="bold"
+        android:layout_weight="0.65"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity = "center_horizontal"
+        android:id="@+id/nuevaLayout"
+        android:weightSum="1"
+        android:layout_marginTop="15dp"
+        >
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/nueva"
+        android:id="@+id/nueva"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/correo"
+        android:background="@drawable/button"
+        android:textStyle="bold"
+        android:layout_weight="0.65"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity = "center_horizontal"
+        android:id="@+id/salirLayout"
+        android:weightSum="1"
+        android:layout_marginTop="15dp"
+        >
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/salir"
+        android:id="@+id/salir"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/nueva"
+        android:background="@drawable/button"
+        android:textStyle="bold"
+        android:layout_weight="0.65"/>
+    </LinearLayout>
+</LinearLayout>

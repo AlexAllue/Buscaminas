@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:gravity = "center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/ayudaLayout"
+        android:layout_weight="0.5"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alias"
+            android:id="@+id/aliasText"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/alias"
+            android:inputType="text"
+            android:text="@string/aliasDefecto"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/parrilla"
+            android:id="@+id/parrillaText"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/parrilla"
+            android:inputType="number"
+            android:text="@string/parrillaDefecto"
+            ><requestFocus/></EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:gravity = "center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/ayudaLayout2"
+        android:layout_weight="0.5"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tiempo"
+            android:id="@+id/tiempoText"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"/>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar"
+            android:progress="60"
+            android:max="300"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tiempo"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="% de minas"
+            android:id="@+id/bombasText"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:entries="@array/entradas_spinner"
+            android:layout_gravity="center_horizontal"
+            />
+    </LinearLayout>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:gravity = "center_horizontal"
+        android:weightSum="1">
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/jugar"
+        android:id="@+id/jugar"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button"
+        android:layout_weight="0.65"
+
+        android:textStyle="bold"/>
+    </LinearLayout>
+</LinearLayout>

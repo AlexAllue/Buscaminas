@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:gravity = "center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/ayudaLayout"
+        android:layout_weight="0.65"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bienvenido"
+        android:id="@+id/bienvenidoText"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ayudaInfo"
+        android:id="@+id/ayudaText"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:gravity = "center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/ayudaLayout2"
+        android:layout_weight="0.35"
+        android:weightSum="1">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ex2"
+            android:layout_gravity="center_horizontal"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/volver"
+        android:id="@+id/volver"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"/>
+    </LinearLayout>
+</LinearLayout>

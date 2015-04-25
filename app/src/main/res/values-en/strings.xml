@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Minesweeper</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!--- Main -->
+
+    <string name="empezar">Start game</string>
+    <string name="ayuda">Help</string>
+    <string name="salir">Exit</string>
+
+
+    <!--- Help -->
+
+    <string name="bienvenido">Welcome to he game MINE SWEEPER!</string>
+    <string name="ayudaInfo">The game is to clear all the boxes for a grill that does not hide a mine.
+    Some boxes have a number, this number indicates the mines totaling all the surrounding squares. Thus, if a box has the number 3 means that the eight squares that there are about (if not in a corner or edge) there are 3 mines and mine- May .
+    If a box with a mine is discovered LOSE the game. Otherwise, you discover all checkboxes mine WIN !!
+    You can set the number of rows of the grid , the percentage of mines in the same and if you want to have a maximum time to complete the game.</string>
+    <string name="volver">Back</string>
+
+
+    <!--- Config -->
+
+    <string name="configuracion">Settings</string>
+    <string name="alias">Nick</string>
+    <string name="aliasDefecto">Alejandro</string>
+    <string name="parrilla">Size map</string>
+    <string name="parrillaDefecto">5</string>
+    <string name="tiempo">Time limit</string>
+    <string name="jugar">Start</string>
+
+
+    <!--- Result -->
+
+    <string name="resultado">Result</string>
+    <string name="fechaText">Day and hour</string>
+    <string name="logText">Log values</string>
+    <string name="correoText">E-mail address</string>
+    <string name="enviar">Send e-mail</string>
+    <string name="correo">alluesan@hotmail.com</string>
+    <string name="nueva">New game</string>
+
+
+    <!--- Game -->
+
+    <string name="partida">Game</string>
+    <string name="casillas">Boxes: </string>
+    <string name="bombas">Bombs: </string>
+    <string name="descubrir">Time: </string>
+
+
+    <!--- Toast y textos -->
+
+    <string name="atrasToast">If you press the back button again you will close the application</string>
+    <string name="limite">No limit</string>
+    <string name="falloAlias">Enter a nick</string>
+    <string name="falloParrilla">Enter a size map</string>
+    <string name="falloDestinatario">Enter a E-mail address</string>
+</resources>

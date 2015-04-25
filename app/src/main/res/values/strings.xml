@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Buscaminas</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!--- Main -->
+
+    <string name="empezar">Empezar partida</string>
+    <string name="ayuda">Ayuda</string>
+    <string name="salir">Salir</string>
+
+
+    <!--- Help -->
+
+    <string name="bienvenido">Bienvenido al juego del BUSCA MINAS!</string>
+    <string name="ayudaInfo">El juego consiste en despejar todas las casillas de una parrilla que no oculten una mina.
+    Algunas casillas tienen un número, este número indica las minas que suman todas las casillas circundantes. Así, si una casilla tiene el número 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o borde) hay 3 minas y 5 sin minas.
+    Si se descubre una casilla con una mina SE PIERDE la partida. En otro caso, descubres todas las casillas sin mina, GANAS !!
+    Puedes configurar el nº de filas de la parrilla, el porcentaje de minas en la misma y si quieres que haya un tiempo máximo para completar el juego.</string>
+    <string name="volver">Ir al juego</string>
+
+
+    <!--- Config -->
+
+    <string name="configuracion">Configuración</string>
+    <string name="alias">Alias identificativo</string>
+    <string name="aliasDefecto">Alejandro</string>
+    <string name="parrilla">Tamaño de parrila</string>
+    <string name="parrillaDefecto">5</string>
+    <string name="tiempo">Limite de tiempo</string>
+    <string name="jugar">Empezar</string>
+
+
+    <!--- Result -->
+
+    <string name="resultado">Resultado</string>
+    <string name="fechaText">Día y hora</string>
+    <string name="logText">Valores del log</string>
+    <string name="correoText">E-mail destinatario</string>
+    <string name="enviar">Enviar correo</string>
+    <string name="correo">alluesan@hotmail.com</string>
+    <string name="nueva">Nueva partida</string>
+
+
+    <!--- Game -->
+
+    <string name="partida">Partida</string>
+    <string name="casillas">Casillas: </string>
+    <string name="bombas">Bombas: </string>
+    <string name="descubrir">Tiempo: </string>
+
+
+    <!--- Toast y textos -->
+
+    <string name="atrasToast">Si pulsas el botón atrás otra vez cerraras la aplicación</string>
+    <string name="limite">Sin límite</string>
+    <string name="falloAlias">Introduce un alias</string>
+    <string name="falloParrilla">Introduce un tamaño de parrilla</string>
+    <string name="falloDestinatario">Introduce un destinatario</string>
+</resources>

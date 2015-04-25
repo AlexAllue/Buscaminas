@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Buscamines</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!--- Main -->
+
+    <string name="empezar">Comenzar partida</string>
+    <string name="ayuda">Ajuda</string>
+    <string name="salir">Sortir</string>
+
+
+    <!--- Help -->
+
+    <string name="bienvenido">Benvingut al joc del BUSCA MINES!</string>
+    <string name="ayudaInfo">El joc consisteix a buidar totes les caselles de una graella que no ocultin una mina.
+    Algunes caselles tenen un nombre, aquest nombre indica les mines que sumen totes les caselles circumdants. Així, si una casella té el número 3, vol dir que de les vuit caselles que hi ha al voltant (si no és en una cantonada o vora) hi ha 3 mines i 5 sense mines.
+    Si es descobreix una casella amb una mina ES PERD la partida. En un altre cas, descobreixes totes les caselles sense mina, GANES !!
+    Pots configurar el nombre de files de la graella, el percentatge de mines a la mateixa i si vols que hi hagi un temps màxim per completar el joc.</string>
+    <string name="volver">Anar al joc</string>
+
+
+    <!--- Config -->
+
+    <string name="configuracion">Configuració</string>
+    <string name="alias">Alias identificatiu</string>
+    <string name="aliasDefecto">Alejandro</string>
+    <string name="parrilla">Mida de graella</string>
+    <string name="parrillaDefecto">5</string>
+    <string name="tiempo">Limit de temps</string>
+    <string name="jugar">Comenzar</string>
+
+
+    <!--- Result -->
+
+    <string name="resultado">Resultat</string>
+    <string name="fechaText">Día i hora</string>
+    <string name="logText">Valors del log</string>
+    <string name="correoText">E-mail destinatari</string>
+    <string name="enviar">Enviar correu</string>
+    <string name="correo">alluesan@hotmail.com</string>
+    <string name="nueva">Nova partida</string>
+
+
+    <!--- Game -->
+
+    <string name="partida">Partida</string>
+    <string name="casillas">Caselles: </string>
+    <string name="bombas">Bombes: </string>
+    <string name="descubrir">Temps: </string>
+
+
+    <!--- Toast y textos -->
+
+    <string name="atrasToast">Si prems el botó enrere una altra vegada tanquessis la aplicació</string>
+    <string name="limite">Sense limit</string>
+    <string name="falloAlias">Introdueix un alies</string>
+    <string name="falloParrilla">Introdueix una mida de graella</string>
+    <string name="falloDestinatario">Introdueix un destinatari</string>
+</resources>
