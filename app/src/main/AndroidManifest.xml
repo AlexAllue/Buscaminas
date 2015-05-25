@@ -38,6 +38,10 @@
             android:name=".GameActivity"
             android:label="@string/partida" >
         </activity>
+        <activity
+            android:name=".GameHostActivity"
+            android:label="@string/partida" >
+        </activity>
     </application>
 
 </manifest>

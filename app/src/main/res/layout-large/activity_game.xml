@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/frag_parr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        class="com.example.allu.buscaminas.ParrillaFrag"
+        tools:layout="@layout/parrilla_frag" />
+    <fragment
+        android:id="@+id/frag_log"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.example.allu.buscaminas.LogFrag"
+        tools:layout="@layout/log_frag"/>
+
+</LinearLayout>

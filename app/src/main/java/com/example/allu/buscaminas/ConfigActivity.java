@@ -75,7 +75,7 @@ public class ConfigActivity extends ActionBarActivity {
                 if(alias.getText().toString().matches("")) Toast.makeText(ConfigActivity.this, R.string.falloAlias, Toast.LENGTH_SHORT).show();
                 else if(parrilla.getText().toString().matches("")) Toast.makeText(ConfigActivity.this, R.string.falloParrilla, Toast.LENGTH_SHORT).show();
                 else{
-                    Intent intent = new Intent(ConfigActivity.this, GameActivity.class);
+                    Intent intent = new Intent(ConfigActivity.this, GameHostActivity.class);
                     intent.putExtra("alias",alias.getText().toString());
                     intent.putExtra("parrilla",parrilla.getText().toString());
                     intent.putExtra("bombas",opcion);

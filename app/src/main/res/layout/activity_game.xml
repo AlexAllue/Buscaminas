@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frag_parr"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    class="com.example.allu.buscaminas.ParrillaFrag"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:layout="@layout/parrilla_frag" />
