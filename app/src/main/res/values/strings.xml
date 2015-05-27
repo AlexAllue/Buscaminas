@@ -59,4 +59,7 @@
     <string name="falloAlias">Introduce un alias</string>
     <string name="falloParrilla">Introduce un tamaño de parrilla</string>
     <string name="falloDestinatario">Introduce un destinatario</string>
+
+    <!---Log -->
+    <string name="log">Casilla seleccionada = </string>
 </resources>

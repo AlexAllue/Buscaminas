@@ -24,6 +24,6 @@ public class LogFrag extends Fragment {
         TextView txtDetalle =
                 (TextView)getView().findViewById(R.id.textView);
 
-        txtDetalle.setText(texto);
+        txtDetalle.append(texto+"\n");
     }
 }

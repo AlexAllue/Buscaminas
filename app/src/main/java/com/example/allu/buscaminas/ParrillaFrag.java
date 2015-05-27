@@ -10,14 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,13 +31,20 @@ public class ParrillaFrag extends Fragment {
 
     ButtonAdapter buttonAdapter;
     private String alias,parrilla,tiempo,numBombas;
-    private int longitud,casillas,nBombas;
+    public String log="";
+    private int longitud,nBombas;
     public ArrayList<String> tablero,apretado;
     ParrillaListener mlistener;
     public static FragmentActivity parrillaActivity;
-    public TextView tiempoText,bombasText,casillasText;
+    public static TextView tiempoText,bombasText,casillasText;
     public ProgressBar progreso;
     public int progresoNum=0;
+    public static int casillas;
+    Date now = new Date();
+    String format = new SimpleDateFormat("HH:mm:ss").format(now);
+    public GameControl gameControl;
+    Calendar calFechaInicial = Calendar.getInstance();
+    public Long inicio;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -78,9 +89,19 @@ public class ParrillaFrag extends Fragment {
 
 
 
+        Calendar calFechaFinal = Calendar.getInstance();
+        calFechaFinal.setTime(new Date());
+
+
+        String ponertiempo;
+        if (tiempo.matches("0")) ponertiempo="Sin límite";
+        else ponertiempo=tiempo+"s";
+        ponerLog("Alias: " + alias + " Casillas: " + casillas + " Minas: " + numBombas + " NºMinas: " + nBombas + " Limite de Tiempo: " + ponertiempo + "\n");
+        gameControl = new GameControl(tiempo,format,log,longitud,nBombas,tablero);
         final GridView gridview = (GridView)getView().findViewById(R.id.gridview);
         gridview.setNumColumns(longitud);
-        gridview.setAdapter(buttonAdapter = new ButtonAdapter(getActivity().getApplicationContext(),longitud,tablero,casillas,nBombas));
+        gameControl.setInicioPartida(calFechaFinal.getTimeInMillis());
+        gridview.setAdapter(buttonAdapter = new ButtonAdapter(getActivity().getApplicationContext(),longitud,tablero,gameControl));
     }
 
 
@@ -128,7 +149,7 @@ public class ParrillaFrag extends Fragment {
     }
 
     public interface ParrillaListener {
-        public void OnArticleSelected(int position);
+        public void OnArticleSelected(String position);
     }
 
     public void setParrillaListener(ParrillaListener listener) {
@@ -145,5 +166,11 @@ public class ParrillaFrag extends Fragment {
     }
 
 
+
+
+
+    public void ponerLog(String parte){
+        log=log+parte+"\n";
+    }
 
 }
