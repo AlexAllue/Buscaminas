@@ -20,9 +20,9 @@ import java.util.Date;
  */
 public class ButtonAdapter extends BaseAdapter {
     private Context mContext;
-    private int longitud;
     public ArrayList<String> tablero;
     private MyOnClickListener clickListener;
+    private int longitud;
 
     public GameControl gameControl;
 
@@ -31,11 +31,11 @@ public class ButtonAdapter extends BaseAdapter {
         mContext = c;
     }
 
-    public ButtonAdapter(Context c,int l,ArrayList<String> t,GameControl gc) {
+    public ButtonAdapter(Context c,GameControl gc) {
         mContext = c;
-        longitud=l;
-        tablero=t;
         gameControl=gc;
+        tablero=gameControl.getTablero();
+        longitud=gameControl.getLongitud();
     }
 
     public int getCount() {
@@ -59,7 +59,7 @@ public class ButtonAdapter extends BaseAdapter {
             btn = new Button(mContext);
             if (mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
                 DisplayMetrics metrics = mContext.getApplicationContext().getResources().getDisplayMetrics();
-                int screenWidth = (int) (metrics.widthPixels*0.65);
+                int screenWidth = (int) (metrics.heightPixels*0.7);
                 btn.setLayoutParams(new GridView.LayoutParams(screenWidth/longitud,screenWidth/longitud));
                 btn.setPadding(0, 0, 0, 0);
             }else{
@@ -71,7 +71,7 @@ public class ButtonAdapter extends BaseAdapter {
 
 
             if(mContext.getResources().getConfiguration().isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE)){
-                btn.setTextSize(100);
+                btn.setTextSize(500/longitud);
             }
 
         } else {
@@ -83,6 +83,19 @@ public class ButtonAdapter extends BaseAdapter {
         btn.setBackgroundResource(R.drawable.button);
         btn.setOnClickListener(clickListener=new MyOnClickListener(position,mContext,gameControl));
         btn.setId(position);
+
+        if(gameControl.getApretado().contains(""+position)){
+            btn.setText(tablero.get(position));
+            btn.setEnabled(false);
+            if(tablero.get(position).matches("1"))btn.setTextColor(Color.BLUE);
+            if(tablero.get(position).matches("2"))btn.setTextColor(Color.GREEN);
+            if(tablero.get(position).matches("3"))btn.setTextColor(Color.RED);
+            if(tablero.get(position).matches("4"))btn.setTextColor(Color.MAGENTA);
+            if(tablero.get(position).matches("5"))btn.setTextColor(Color.YELLOW);
+            if(tablero.get(position).matches("6"))btn.setTextColor(Color.CYAN);
+            if(tablero.get(position).matches("7"))btn.setTextColor(Color.GRAY);
+            if(tablero.get(position).matches("8"))btn.setTextColor(Color.BLACK);
+        }
 
         return btn;
 

@@ -5,4 +5,4 @@
     android:layout_width="match_parent"
     class="com.example.allu.buscaminas.ParrillaFrag"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:layout="@layout/parrilla_frag" />
+    tools:layout="@layout/parrilla_frag"/>

@@ -37,7 +37,7 @@ public class ParrillaFrag extends Fragment {
     ParrillaListener mlistener;
     public static FragmentActivity parrillaActivity;
     public static TextView tiempoText,bombasText,casillasText;
-    public ProgressBar progreso;
+    public static ProgressBar progreso;
     public int progresoNum=0;
     public static int casillas;
     Date now = new Date();
@@ -97,11 +97,21 @@ public class ParrillaFrag extends Fragment {
         if (tiempo.matches("0")) ponertiempo="Sin límite";
         else ponertiempo=tiempo+"s";
         ponerLog("Alias: " + alias + " Casillas: " + casillas + " Minas: " + numBombas + " NºMinas: " + nBombas + " Limite de Tiempo: " + ponertiempo + "\n");
-        gameControl = new GameControl(tiempo,format,log,longitud,nBombas,tablero);
+        gameControl = new GameControl(tiempo,format,log,longitud,nBombas,tablero,apretado);
         final GridView gridview = (GridView)getView().findViewById(R.id.gridview);
         gridview.setNumColumns(longitud);
-        gameControl.setInicioPartida(calFechaFinal.getTimeInMillis());
-        gridview.setAdapter(buttonAdapter = new ButtonAdapter(getActivity().getApplicationContext(),longitud,tablero,gameControl));
+
+        if (state != null) {
+            gameControl = state.getParcelable("gameControl");
+            casillasText.setText("Casillas: "+gameControl.getCasillas());
+            tiempoText.setText("Tiempo: "+gameControl.calcularTiempoRestante()+"s");
+            progreso.setProgress(gameControl.getProgreso());
+        }else{
+            gameControl.setInicioPartida(calFechaFinal.getTimeInMillis());
+        }
+        gridview.setAdapter(buttonAdapter = new ButtonAdapter(getActivity().getApplicationContext(),gameControl));
+
+
     }
 
 
@@ -166,6 +176,13 @@ public class ParrillaFrag extends Fragment {
     }
 
 
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("gameControl",gameControl);
+
+    }
 
 
 
@@ -173,4 +190,17 @@ public class ParrillaFrag extends Fragment {
         log=log+parte+"\n";
     }
 
+
+
+    public static TextView getCasillasRestantes(){
+        return casillasText;
+    }
+
+    public static TextView getTiempoRestante(){
+        return tiempoText;
+    }
+
+    public static ProgressBar getProgreso(){
+        return progreso;
+    }
 }

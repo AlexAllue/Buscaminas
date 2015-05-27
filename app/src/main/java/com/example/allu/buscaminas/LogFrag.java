@@ -12,6 +12,8 @@ import android.widget.TextView;
  */
 public class LogFrag extends Fragment {
 
+    public TextView txtDetalle;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -20,10 +22,27 @@ public class LogFrag extends Fragment {
         return inflater.inflate(R.layout.log_frag, container, false);
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        txtDetalle =(TextView)getView().findViewById(R.id.textView);
+
+        if (savedInstanceState != null) {
+            String text = savedInstanceState.getString("log");
+            txtDetalle.setText(text);
+        }
+
+    }
+
     public void mostrarLog(String texto) {
-        TextView txtDetalle =
-                (TextView)getView().findViewById(R.id.textView);
 
         txtDetalle.append(texto+"\n");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        outState.putString("log", txtDetalle.getText().toString());
+        super.onSaveInstanceState(outState);
     }
 }
