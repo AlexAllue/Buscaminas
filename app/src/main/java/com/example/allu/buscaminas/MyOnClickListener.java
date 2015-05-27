@@ -127,7 +127,7 @@ public class MyOnClickListener implements View.OnClickListener {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         mediaPlayer.stop();
-                        ponerLog("Has ganado!! " + " Te han sobrado " /*(maximo - transcurrido)*/ + "s");
+                        ponerLog("Has ganado!! " + " Te han sobrado " +gamecontrol.calcularTiempoRestante() + "s");
                         Intent intent = new Intent(context.getApplicationContext(), ResultActivity.class);
                         intent.putExtra("log", gamecontrol.getLogInicial() + log);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

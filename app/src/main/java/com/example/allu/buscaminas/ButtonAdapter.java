@@ -71,7 +71,7 @@ public class ButtonAdapter extends BaseAdapter {
 
 
             if(mContext.getResources().getConfiguration().isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE)){
-                btn.setTextSize(500/longitud);
+                btn.setTextSize(400/longitud);
             }
 
         } else {

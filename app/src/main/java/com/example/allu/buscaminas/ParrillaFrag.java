@@ -43,8 +43,7 @@ public class ParrillaFrag extends Fragment {
     Date now = new Date();
     String format = new SimpleDateFormat("HH:mm:ss").format(now);
     public GameControl gameControl;
-    Calendar calFechaInicial = Calendar.getInstance();
-    public Long inicio;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -97,7 +96,9 @@ public class ParrillaFrag extends Fragment {
         if (tiempo.matches("0")) ponertiempo="Sin límite";
         else ponertiempo=tiempo+"s";
         ponerLog("Alias: " + alias + " Casillas: " + casillas + " Minas: " + numBombas + " NºMinas: " + nBombas + " Limite de Tiempo: " + ponertiempo + "\n");
+
         gameControl = new GameControl(tiempo,format,log,longitud,nBombas,tablero,apretado);
+
         final GridView gridview = (GridView)getView().findViewById(R.id.gridview);
         gridview.setNumColumns(longitud);
 
@@ -109,6 +110,7 @@ public class ParrillaFrag extends Fragment {
         }else{
             gameControl.setInicioPartida(calFechaFinal.getTimeInMillis());
         }
+
         gridview.setAdapter(buttonAdapter = new ButtonAdapter(getActivity().getApplicationContext(),gameControl));
 
 
