@@ -64,4 +64,6 @@
     <!---Log -->
     <string name="log">Casilla seleccionada = </string>
     <string name="historial">Historial</string>
+    <string name="context1">Borrar</string>
+    <string name="context2">Obtener mas</string>
 </resources>

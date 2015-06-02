@@ -63,6 +63,7 @@ public class ResultActivity extends ActionBarActivity {
         db = padbh.getWritableDatabase();
         if(db != null){
             ContentValues nuevoRegistro = new ContentValues();
+            nuevoRegistro.put("alias",alias);
             nuevoRegistro.put("query",alias+" "+fechaFin+" "+game);
             nuevoRegistro.put("registro",log);
             db.insert("Partidas",null,nuevoRegistro);

@@ -13,6 +13,7 @@ public class PartidasSQLiteHelper extends SQLiteOpenHelper {
     //Sentencia SQL para crear la tabla de Usuarios
     String sqlCreate = "CREATE TABLE Partidas " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            " alias TEXT, " +
             " query TEXT, " +
             " registro TEXT)";
 

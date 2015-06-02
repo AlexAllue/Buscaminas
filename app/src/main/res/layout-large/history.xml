@@ -9,19 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.90"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
 
     <fragment
         android:id="@+id/frag_query"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.80"
         class="com.example.allu.buscaminas.QueryFrag"
     />
     <fragment
         android:id="@+id/frag_reg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.20"
         class="com.example.allu.buscaminas.RegistroFrag"
         tools:layout="@layout/registro_frag"/>
     </LinearLayout>

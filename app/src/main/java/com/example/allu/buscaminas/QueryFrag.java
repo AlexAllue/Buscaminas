@@ -5,9 +5,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,6 +24,9 @@ public class QueryFrag extends ListFragment {
     private SQLiteDatabase db;
     private String value;
     private ArrayList<String> values = new ArrayList<>();
+    private Cursor c,c2;
+    private ArrayAdapter<String> adapter;
+    private String[] args;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +44,7 @@ public class QueryFrag extends ListFragment {
         }else {
 
 
-            Cursor c = db.rawQuery("SELECT query FROM Partidas", null);
+            c = db.rawQuery("SELECT alias,query FROM Partidas", null);
             c.moveToFirst();
             while (c.moveToNext()) {
                 value = c.getString(c.getColumnIndex("query"));
@@ -44,8 +52,9 @@ public class QueryFrag extends ListFragment {
             }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, values);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, values);
         setListAdapter(adapter);
+        registerForContextMenu(getListView());
     }
 
     @Override
@@ -65,7 +74,7 @@ public class QueryFrag extends ListFragment {
     private String getRegistro(String query) {
         String[] args = new String[]{query};
         String[] campo = new String[]{"registro"};
-        Cursor c = db.query("Partidas",campo,"query=?",args,null,null,null);
+        c = db.query("Partidas",campo,"query=?",args,null,null,null);
         c.moveToFirst();
             return c.getString(c.getColumnIndex("registro"));
     }
@@ -80,5 +89,45 @@ public class QueryFrag extends ListFragment {
     public void onSaveInstanceState(Bundle outState) {
         outState.putStringArrayList("values", values);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu,View v, ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu,v, menuInfo);
+        MenuInflater inflater=getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_context,menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        int pos = (int)info.position;
+        c.moveToPosition(pos+1);
+
+        switch (item.getItemId()) {
+            case R.id.borrarMenu:
+                args = new String[]{c.getString(c.getColumnIndex("query"))};
+                db.delete("Partidas","_id=?",args);
+                values.remove(pos);
+                adapter.notifyDataSetChanged();
+                return true;
+            case R.id.modificarMenu:
+                args = new String[]{c.getString(c.getColumnIndex("alias"))};
+                c = db.rawQuery("SELECT query FROM Partidas "+ "WHERE alias=?", args);
+                c.moveToFirst();
+                values.removeAll(values);
+                while (c.moveToNext()) {
+                    value = c.getString(c.getColumnIndex("query"));
+                    values.add(value);
+                }
+                adapter.notifyDataSetChanged();
+                return true;
+        }
+
+
+        return super.onContextItemSelected(item);
     }
 }
