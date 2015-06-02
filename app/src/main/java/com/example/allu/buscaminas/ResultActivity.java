@@ -1,6 +1,8 @@
 package com.example.allu.buscaminas;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -23,7 +25,8 @@ public class ResultActivity extends ActionBarActivity {
     private Button enviar,nueva,salir;
     private EditText email,asunto,mensaje;
     private boolean atrasSalir;
-    private String fechaFin,log;
+    private String fechaFin,log,game,alias;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class ResultActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         log=intent.getStringExtra("log");
+        game=intent.getStringExtra("game");
+        alias=intent.getStringExtra("alias");
 
         enviar = (Button)findViewById(R.id.enviar);
         nueva = (Button)findViewById(R.id.nueva);
@@ -52,6 +57,17 @@ public class ResultActivity extends ActionBarActivity {
         asunto.setText(fechaFin);
         mensaje.setText(log);
 
+
+        PartidasSQLiteHelper padbh =
+                new PartidasSQLiteHelper(this, "DBPartidas", null, 1);
+        db = padbh.getWritableDatabase();
+        if(db != null){
+            ContentValues nuevoRegistro = new ContentValues();
+            nuevoRegistro.put("query",alias+" "+fechaFin+" "+game);
+            nuevoRegistro.put("registro",log);
+            db.insert("Partidas",null,nuevoRegistro);
+        }
+
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +82,7 @@ public class ResultActivity extends ActionBarActivity {
         nueva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResultActivity.this, ConfigActivity.class);
+                Intent intent = new Intent(ResultActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -123,6 +139,12 @@ public class ResultActivity extends ActionBarActivity {
         asunto.setText(savedInstanceState.getString("asunto"));
         mensaje.setText(savedInstanceState.getString("mensaje"));
 
+    }
+
+    @Override
+    protected void onDestroy () {
+        super.onDestroy();
+        db.close();
     }
 
 }

@@ -31,6 +31,7 @@
     <string name="parrillaDefecto">5</string>
     <string name="tiempo">Limite de tiempo</string>
     <string name="jugar">Empezar</string>
+    <string name="consultar">Consultar partidas</string>
 
 
     <!--- Result -->
@@ -62,4 +63,5 @@
 
     <!---Log -->
     <string name="log">Casilla seleccionada = </string>
+    <string name="historial">Historial</string>
 </resources>

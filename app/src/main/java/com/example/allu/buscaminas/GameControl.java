@@ -22,11 +22,13 @@ public class GameControl implements Parcelable {
     public int casillas;
     public boolean end=false;
     public int progreso;
+    public String alias;
 
     public GameControl() {
     }
 
-    public GameControl(String tiempoMaximo,String inicioTirada,String logInicial,int longitud,int nBombas,ArrayList<String> tablero,ArrayList<String> apretado) {
+    public GameControl(String alias,String tiempoMaximo,String inicioTirada,String logInicial,int longitud,int nBombas,ArrayList<String> tablero,ArrayList<String> apretado) {
+        this.alias=alias;
         this.tiempoMaximo=tiempoMaximo;
         this.inicioTirada = inicioTirada;
         this.logInicial=logInicial;
@@ -39,6 +41,10 @@ public class GameControl implements Parcelable {
 
     public int getnBombas() {
         return nBombas;
+    }
+
+    public String getAlias() {
+        return alias;
     }
 
     public int getCasillas() {

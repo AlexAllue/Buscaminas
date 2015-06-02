@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
-    private Button empezar,ayuda,salir;
+    private Button empezar,ayuda,salir,consultar;
     private boolean atrasSalir=false;
 
     @Override
@@ -28,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
         empezar = (Button)findViewById(R.id.empezar);
         ayuda = (Button)findViewById(R.id.ayuda);
         salir = (Button)findViewById(R.id.salir);
+        consultar = (Button)findViewById(R.id.consultar);
 
         empezar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +51,15 @@ public class MainActivity extends ActionBarActivity {
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+
+        consultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HistoryHostActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

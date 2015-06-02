@@ -97,7 +97,7 @@ public class ParrillaFrag extends Fragment {
         else ponertiempo=tiempo+"s";
         ponerLog("Alias: " + alias + " Casillas: " + casillas + " Minas: " + numBombas + " NºMinas: " + nBombas + " Limite de Tiempo: " + ponertiempo + "\n");
 
-        gameControl = new GameControl(tiempo,format,log,longitud,nBombas,tablero,apretado);
+        gameControl = new GameControl(alias,tiempo,format,log,longitud,nBombas,tablero,apretado);
 
         final GridView gridview = (GridView)getView().findViewById(R.id.gridview);
         gridview.setNumColumns(longitud);

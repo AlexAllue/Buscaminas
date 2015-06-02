@@ -73,6 +73,8 @@ public class MyOnClickListener implements View.OnClickListener {
                         ponerLog("Has agotado el tiempo!! " + " Te han quedado " + (casillas + 1) + " Casillas por descubrir");
                         Intent intent = new Intent(context.getApplicationContext(), ResultActivity.class);
                         intent.putExtra("log", gamecontrol.getLogInicial() + log);
+                        intent.putExtra("game","Tiempo agotado");
+                        intent.putExtra("alias",gamecontrol.getAlias());
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.getApplicationContext().startActivity(intent);
                         ParrillaFrag.parrillaActivity.finish();
@@ -97,6 +99,8 @@ public class MyOnClickListener implements View.OnClickListener {
                         ponerLog("Has perdido!! Bomba en la casilla " + ((position % longitud) + 1) + "," + ((position / longitud) + 1) + " Te han quedado " + casillas + " Casillas por descubrir");
                         Intent intent = new Intent(context.getApplicationContext(), ResultActivity.class);
                         intent.putExtra("log", gamecontrol.getLogInicial() + log);
+                        intent.putExtra("game","Derrota");
+                        intent.putExtra("alias",gamecontrol.getAlias());
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.getApplicationContext().startActivity(intent);
                         ParrillaFrag.parrillaActivity.finish();
@@ -130,6 +134,8 @@ public class MyOnClickListener implements View.OnClickListener {
                         ponerLog("Has ganado!! " + " Te han sobrado " +gamecontrol.calcularTiempoRestante() + "s");
                         Intent intent = new Intent(context.getApplicationContext(), ResultActivity.class);
                         intent.putExtra("log", gamecontrol.getLogInicial() + log);
+                        intent.putExtra("game","Victoria");
+                        intent.putExtra("alias",gamecontrol.getAlias());
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.getApplicationContext().startActivity(intent);
                         ParrillaFrag.parrillaActivity.finish();
