@@ -1,11 +1,15 @@
 package com.example.allu.buscaminas;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,6 +20,7 @@ public class MainActivity extends ActionBarActivity {
     private Button empezar,ayuda,salir,consultar;
     private boolean atrasSalir=false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +30,9 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setIcon(R.drawable.icon);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff5bc610")));
 
+
+
+
         empezar = (Button)findViewById(R.id.empezar);
         ayuda = (Button)findViewById(R.id.ayuda);
         salir = (Button)findViewById(R.id.salir);
@@ -33,7 +41,12 @@ public class MainActivity extends ActionBarActivity {
         empezar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ConfigActivity.class);
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                Intent intent = new Intent(MainActivity.this, GameHostActivity.class);
+                intent.putExtra("alias",sharedPreferences.getString("aliasPref","Alejandro"));
+                intent.putExtra("parrilla",sharedPreferences.getString("sizePref","5"));
+                intent.putExtra("bombas",sharedPreferences.getString("minasPref","25%"));
+                intent.putExtra("tiempo",""+sharedPreferences.getInt("timePref",60));
                 startActivity(intent);
                 finish();
             }
@@ -80,5 +93,16 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent settingsActivity = new Intent(getBaseContext(), SharedActivity.class);
+                startActivity(settingsActivity);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

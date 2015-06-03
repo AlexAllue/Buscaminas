@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<EditTextPreference
+    android:title="Alias"
+    android:defaultValue="Alejandro"
+    android:summary="Alias del jugador"
+    android:key="aliasPref"
+    android:textStyle="bold"
+    android:textSize="22dp"/>
+    <EditTextPreference
+        android:title="Tamaño de la parrilla"
+        android:defaultValue="5"
+        android:summary="Nº de filas y columnas de la parrilla"
+        android:key="sizePref"
+        android:inputType="number"
+        android:textStyle="bold"
+        android:textSize="22dp"/>
+    <PreferenceCategory>
+    <com.example.allu.buscaminas.SeekBarPreference
+        android:key="timePref"
+        android:title="Control del tiempo"
+        android:summary="Ajusta el tiempo desde sin limite hasta 300 segundos"
+        android:defaultValue="60"
+        android:max="300"
+        android:textSize="22dp"
+        />
+    </PreferenceCategory>
+    <ListPreference
+        android:title="Porcentaje de minas"
+        android:summary="Porcentaje a aplicar al total de las casillas"
+        android:key="minasPref"
+        android:defaultValue="25"
+        android:entries="@array/listArray"
+        android:entryValues="@array/listValues"
+        android:textSize="22dp"
+        />
+</PreferenceScreen>

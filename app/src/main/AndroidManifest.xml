@@ -46,6 +46,10 @@
             android:name=".RegistroActivity"
             android:label="@string/historial" >
         </activity>
+        <activity
+            android:name=".SharedActivity"
+            android:label="@string/configuracion" >
+        </activity>
     </application>
 
 </manifest>
