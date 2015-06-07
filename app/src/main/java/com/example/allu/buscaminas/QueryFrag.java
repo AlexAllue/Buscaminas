@@ -4,6 +4,7 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -45,7 +46,10 @@ public class QueryFrag extends ListFragment {
 
 
             c = db.rawQuery("SELECT alias,query FROM Partidas", null);
-            c.moveToFirst();
+            if(c.moveToFirst()){
+                value = c.getString(c.getColumnIndex("query"));
+                values.add(value);
+            }
             while (c.moveToNext()) {
                 value = c.getString(c.getColumnIndex("query"));
                 values.add(value);
@@ -68,6 +72,7 @@ public class QueryFrag extends ListFragment {
             Intent in = new Intent(getActivity(), RegistroActivity.class);
             in.putExtra("value", getRegistro(item));
             startActivity(in);
+            getActivity().finish();
         }
     }
 
@@ -105,12 +110,12 @@ public class QueryFrag extends ListFragment {
         // as you specify a parent activity in AndroidManifest.xml.
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         int pos = (int)info.position;
-        c.moveToPosition(pos+1);
+        c.moveToPosition(pos);
 
         switch (item.getItemId()) {
             case R.id.borrarMenu:
                 args = new String[]{c.getString(c.getColumnIndex("query"))};
-                db.delete("Partidas","_id=?",args);
+                db.delete("Partidas","query=?",args);
                 values.remove(pos);
                 adapter.notifyDataSetChanged();
                 return true;
@@ -119,10 +124,33 @@ public class QueryFrag extends ListFragment {
                 c = db.rawQuery("SELECT query FROM Partidas "+ "WHERE alias=?", args);
                 c.moveToFirst();
                 values.removeAll(values);
+                if(c.moveToFirst()){
+                    value = c.getString(c.getColumnIndex("query"));
+                    values.add(value);
+                }
                 while (c.moveToNext()) {
                     value = c.getString(c.getColumnIndex("query"));
                     values.add(value);
                 }
+                adapter.notifyDataSetChanged();
+                return true;
+            case R.id.enviarMenu:
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                emailIntent.putExtra(Intent.EXTRA_EMAIL,"");
+                String[] campo = new String[]{"registro"};
+                String[] args = new String[]{c.getString(c.getColumnIndex("query"))};
+                c2 = db.query("Partidas",campo,"query=?",args,null,null,null);
+                c2.moveToFirst();
+
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, args);
+                emailIntent.putExtra(Intent.EXTRA_TEXT, c2.getString(c2.getColumnIndex("registro")));
+                emailIntent.setType("message/rfc822");
+                startActivity(Intent.createChooser(emailIntent, "Email "));
+                return true;
+            case R.id.borrarTodoMenu:
+                db.delete("Partidas", null, null);
+                values.clear();
                 adapter.notifyDataSetChanged();
                 return true;
         }

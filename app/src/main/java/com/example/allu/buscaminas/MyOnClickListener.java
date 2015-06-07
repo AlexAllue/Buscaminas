@@ -50,7 +50,8 @@ public class MyOnClickListener implements View.OnClickListener {
             casillas = gamecontrol.restarCasilla();
 
             ParrillaFrag.getCasillasRestantes().setText("Casillas: "+gamecontrol.getCasillas());
-            ParrillaFrag.getTiempoRestante().setText("Tiempo: "+gamecontrol.calcularTiempoRestante()+"s");
+            if(!gamecontrol.tiempoMaximo.matches("SinTiempo")){
+            ParrillaFrag.getTiempoRestante().setText("Tiempo: "+gamecontrol.calcularTiempoRestante()+"s");}
             ParrillaFrag.getProgreso().setProgress(gamecontrol.getProgreso());
 
             Date now = new Date();
@@ -131,7 +132,8 @@ public class MyOnClickListener implements View.OnClickListener {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         mediaPlayer.stop();
-                        ponerLog("Has ganado!! " + " Te han sobrado " +gamecontrol.calcularTiempoRestante() + "s");
+                        if(gamecontrol.tiempoMaximo.matches("SinTiempo")){ponerLog("Has ganado!! Jugabas sin tiempo");}
+                        else ponerLog("Has ganado!! " + " Te han sobrado " +gamecontrol.calcularTiempoRestante() + "s");
                         Intent intent = new Intent(context.getApplicationContext(), ResultActivity.class);
                         intent.putExtra("log", gamecontrol.getLogInicial() + log);
                         intent.putExtra("game","Victoria");

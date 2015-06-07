@@ -6,7 +6,17 @@
         android:title="@string/context1" />
 
     <item
-        android:id="@+id/modificarMenu"
-        android:orderInCategory="2"
-        android:title="@string/context2" />
+    android:id="@+id/modificarMenu"
+    android:orderInCategory="2"
+    android:title="@string/context2" />
+
+    <item
+        android:id="@+id/enviarMenu"
+        android:orderInCategory="3"
+        android:title="@string/context3" />
+
+    <item
+        android:id="@+id/borrarTodoMenu"
+        android:orderInCategory="4"
+        android:title="@string/context4" />
 </menu>

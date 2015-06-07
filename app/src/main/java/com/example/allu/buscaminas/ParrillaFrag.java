@@ -79,7 +79,7 @@ public class ParrillaFrag extends Fragment {
         bombasText = (TextView) getView().findViewById(R.id.bombasText);
 
         casillasText.append(casillas+"");
-        tiempoText.append(tiempo+"s");
+
         bombasText.append(nBombas+"");
 
         progreso = (ProgressBar) getView().findViewById(R.id.progressBar);
@@ -93,8 +93,15 @@ public class ParrillaFrag extends Fragment {
 
 
         String ponertiempo;
-        if (tiempo.matches("0")) ponertiempo="Sin límite";
-        else ponertiempo=tiempo+"s";
+        if (tiempo.matches("0")) {
+            ponertiempo = "Sin límite";
+            tiempoText.append("Sin límite");
+            tiempo="SinTiempo";
+        }else{
+            tiempoText.append(tiempo+"s");
+            ponertiempo=tiempo+"s";
+        }
+
         ponerLog("Alias: " + alias + " Casillas: " + casillas + " Minas: " + numBombas + " NºMinas: " + nBombas + " Limite de Tiempo: " + ponertiempo + "\n");
 
         gameControl = new GameControl(alias,tiempo,format,log,longitud,nBombas,tablero,apretado);
@@ -105,7 +112,8 @@ public class ParrillaFrag extends Fragment {
         if (state != null) {
             gameControl = state.getParcelable("gameControl");
             casillasText.setText("Casillas: "+gameControl.getCasillas());
-            tiempoText.setText("Tiempo: "+gameControl.calcularTiempoRestante()+"s");
+            if(!tiempo.matches("SinTiempo")){
+            tiempoText.setText("Tiempo: "+gameControl.calcularTiempoRestante()+"s");}
             progreso.setProgress(gameControl.getProgreso());
         }else{
             gameControl.setInicioPartida(calFechaFinal.getTimeInMillis());

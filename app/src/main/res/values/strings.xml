@@ -66,4 +66,7 @@
     <string name="historial">Historial</string>
     <string name="context1">Borrar</string>
     <string name="context2">Obtener mas</string>
+    <string name="context3">Enviar por correo</string>
+    <string name="context4">Borrar todo</string>
+    <string name="menu">Volver al menu</string>
 </resources>

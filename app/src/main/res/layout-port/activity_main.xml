@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:text="@string/ayuda"
             android:id="@+id/ayuda"
-            android:layout_centerHorizontal="true"
             android:background="@drawable/button"
             android:layout_weight="0.65"
             android:textStyle="bold"/>

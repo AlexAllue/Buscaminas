@@ -95,6 +95,7 @@ public class GameControl implements Parcelable {
     }
 
     public boolean calcularFinalPartida(){
+        if(tiempoMaximo.matches("SinTiempo")){return false;}
         Calendar calFechaFinal = Calendar.getInstance();
         calFechaFinal.setTime(new Date());
         if((calFechaFinal.getTimeInMillis()-inicioPartida)/1000<Integer.parseInt(tiempoMaximo))return false;

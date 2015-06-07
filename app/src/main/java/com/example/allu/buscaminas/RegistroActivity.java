@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Allu on 02/06/2015.
@@ -17,6 +18,7 @@ public class RegistroActivity extends ActionBarActivity {
 
     private TextView detalle;
     private Button volver;
+    private boolean atrasSalir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class RegistroActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -60,5 +62,15 @@ public class RegistroActivity extends ActionBarActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
         detalle.setText(savedInstanceState.getString("reg"));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (atrasSalir) {
+            super.onBackPressed();
+            return;
+        }
+        this.atrasSalir = true;
+        Toast.makeText(this, R.string.atrasToast, Toast.LENGTH_LONG).show();
     }
 }

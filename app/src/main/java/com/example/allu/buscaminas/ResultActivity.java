@@ -2,11 +2,13 @@ package com.example.allu.buscaminas;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +25,7 @@ import java.util.Date;
  */
 public class ResultActivity extends ActionBarActivity {
 
-    private Button enviar,nueva,salir;
+    private Button enviar,nueva,salir,menu;
     private EditText email,asunto,mensaje;
     private boolean atrasSalir;
     private String fechaFin,log,game,alias;
@@ -47,6 +49,7 @@ public class ResultActivity extends ActionBarActivity {
         enviar = (Button)findViewById(R.id.enviar);
         nueva = (Button)findViewById(R.id.nueva);
         salir = (Button)findViewById(R.id.salir);
+        menu = (Button)findViewById(R.id.menu);
 
         email = (EditText)findViewById(R.id.email);
         asunto = (EditText)findViewById(R.id.fecha);
@@ -82,6 +85,20 @@ public class ResultActivity extends ActionBarActivity {
         });
 
         nueva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                Intent intent = new Intent(ResultActivity.this, GameHostActivity.class);
+                intent.putExtra("alias",sharedPreferences.getString("aliasPref","Alejandro"));
+                intent.putExtra("parrilla",sharedPreferences.getString("sizePref","5"));
+                intent.putExtra("bombas",sharedPreferences.getString("minasPref","25%"));
+                intent.putExtra("tiempo",""+sharedPreferences.getInt("timePref",60));
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ResultActivity.this, MainActivity.class);

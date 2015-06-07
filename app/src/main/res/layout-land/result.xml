@@ -110,6 +110,26 @@
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:gravity = "center_horizontal"
+            android:id="@+id/menuLayout"
+            android:weightSum="1"
+            android:layout_marginTop="15dp"
+            >
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/menu"
+                android:id="@+id/menu"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/nueva"
+                android:background="@drawable/button"
+                android:textStyle="bold"
+                android:layout_weight="0.65"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:gravity = "center_horizontal"
             android:id="@+id/salirLayout"
             android:weightSum="1"
             android:layout_marginTop="15dp"
@@ -120,7 +140,7 @@
                 android:text="@string/salir"
                 android:id="@+id/salir"
                 android:layout_gravity="center_horizontal"
-                android:layout_below="@+id/nueva"
+                android:layout_below="@+id/menu"
                 android:background="@drawable/button"
                 android:textStyle="bold"
                 android:layout_weight="0.65"/>
